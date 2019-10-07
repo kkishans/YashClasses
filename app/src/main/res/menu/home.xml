@@ -4,7 +4,7 @@
     <item
         android:id="@+id/all_student"
         android:orderInCategory="100"
-        android:title="@string/menu_all_students"
+        android:title="@string/menu_std_manage"
         app:showAsAction="never" />
     <item
         android:id="@+id/add_student"

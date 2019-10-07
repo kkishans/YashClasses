@@ -1,4 +1,4 @@
-package com.example.yashclasses.ui.allstudents;
+package com.example.yashclasses.ui.std_manage;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.yashclasses.R;
 
-public class AllStudentsFragment extends Fragment {
+public class StdManageFragment extends Fragment {
 
-    private AllStudentsViewModel allStudentsViewModel;
+    private StdManageViewModel stdManageViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        allStudentsViewModel =
-                ViewModelProviders.of(this).get(AllStudentsViewModel.class);
+        stdManageViewModel =
+                ViewModelProviders.of(this).get(StdManageViewModel.class);
         View root = inflater.inflate(R.layout.fragment_all_students, container, false);
         final TextView textView = root.findViewById(R.id.text_gallery);
-        allStudentsViewModel.getText().observe(this, new Observer<String>() {
+        stdManageViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

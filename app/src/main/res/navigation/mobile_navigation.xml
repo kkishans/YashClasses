@@ -12,9 +12,9 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_all_student"
-        android:name="com.example.yashclasses.ui.allstudents.AllStudentsFragment"
-        android:label="@string/menu_all_students"
+        android:id="@+id/nav_std_manage"
+        android:name="com.example.yashclasses.ui.std_manage.StdManageFragment"
+        android:label="@string/menu_std_manage"
         tools:layout="@layout/fragment_all_students" />
 
     <fragment

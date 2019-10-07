@@ -9,7 +9,7 @@
     <string name="action_settings">Settings</string>
 
     <string name="menu_home">Home</string>
-    <string name="menu_all_students">All Students</string>
+    <string name="menu_std_manage">Standard Management</string>
     <string name="menu_add_student">Add Student</string>
     <string name="menu_manage_fees">Manage Fees</string>
     <string name="menu_share">Share</string>
