@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.yashclasses.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_all_student"
+        android:name="com.example.yashclasses.ui.allstudents.AllStudentsFragment"
+        android:label="@string/menu_all_students"
+        tools:layout="@layout/fragment_all_students" />
+
+    <fragment
+        android:id="@+id/nav_add_student"
+        android:name="com.example.yashclasses.ui.addstudent.AddStudentFragment"
+        android:label="@string/menu_add_student"
+        tools:layout="@layout/fragment_add_student" />
+
+    <fragment
+        android:id="@+id/nav_manage_fees"
+        android:name="com.example.yashclasses.ui.managefees.ManageFees"
+        android:label="@string/menu_manage_fees"
+        tools:layout="@layout/fragment_manage_fees" />
+
+    <fragment
+        android:id="@+id/nav_share"
+        android:name="com.example.yashclasses.ui.share.ShareFragment"
+        android:label="@string/menu_share"
+        tools:layout="@layout/fragment_share" />
+
+    <fragment
+        android:id="@+id/nav_send"
+        android:name="com.example.yashclasses.ui.send.SendFragment"
+        android:label="@string/menu_send"
+        tools:layout="@layout/fragment_send" />
+</navigation>
