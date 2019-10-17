@@ -79,7 +79,7 @@ public class StdManageFragment extends Fragment implements View.OnClickListener 
     public void addStd() {
         StdDialog stdDialog = new StdDialog();
         stdDialog.show(getFragmentManager()," Std Manage");
-
+        populateStdList();
     }
     @Override
     public void onClick(View view) {
