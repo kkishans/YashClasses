@@ -13,8 +13,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.yashclasses.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class ManageFees extends Fragment {
+public class ManageFeesFragment extends Fragment {
 
     private ManageFeesViewModel manageFeesViewModel;
 
@@ -30,6 +31,8 @@ public class ManageFees extends Fragment {
                 textView.setText(s);
             }
         });
+//        FloatingActionButton fab = root.findViewById(R.id.fab);
+//        fab.hide();
         return root;
     }
 }

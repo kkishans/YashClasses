@@ -14,4 +14,10 @@
     <string name="menu_manage_fees">Manage Fees</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+
+    <string-array name="medium">
+        <item>Gujarati</item>
+        <item>English</item>
+        <item>Hindi</item>
+    </string-array>
 </resources>

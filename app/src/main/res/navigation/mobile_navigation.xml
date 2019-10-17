@@ -15,7 +15,7 @@
         android:id="@+id/nav_std_manage"
         android:name="com.example.yashclasses.ui.std_manage.StdManageFragment"
         android:label="@string/menu_std_manage"
-        tools:layout="@layout/fragment_all_students" />
+        tools:layout="@layout/fragment_std_manage" />
 
     <fragment
         android:id="@+id/nav_add_student"
@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/nav_manage_fees"
-        android:name="com.example.yashclasses.ui.managefees.ManageFees"
+        android:name="com.example.yashclasses.ui.managefees.ManageFeesFragment"
         android:label="@string/menu_manage_fees"
         tools:layout="@layout/fragment_manage_fees" />
 

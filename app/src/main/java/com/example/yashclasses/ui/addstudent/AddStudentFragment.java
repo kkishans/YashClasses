@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.yashclasses.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class AddStudentFragment extends Fragment {
 
@@ -30,6 +31,8 @@ public class AddStudentFragment extends Fragment {
                 textView.setText(s);
             }
         });
+//        FloatingActionButton fab = root.findViewById(R.id.fab);
+//        fab.hide();
         return root;
     }
 }

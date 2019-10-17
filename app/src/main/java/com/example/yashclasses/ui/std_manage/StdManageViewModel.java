@@ -10,7 +10,7 @@ public class StdManageViewModel extends ViewModel {
 
     public StdManageViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is All Student fragment");
+        mText.setValue("Std List");
     }
 
     public LiveData<String> getText() {
