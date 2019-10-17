@@ -87,6 +87,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
+
     public void printMessage() {
         etStd = findViewById(R.id.txtstd);
         etFees = findViewById(R.id.txtfees);
