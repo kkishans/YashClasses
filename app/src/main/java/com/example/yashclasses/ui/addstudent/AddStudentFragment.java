@@ -54,8 +54,6 @@ public class AddStudentFragment extends Fragment implements View.OnClickListener
         ArrayAdapter adapter = new ArrayAdapter(getContext(),R.layout.support_simple_spinner_dropdown_item, medium);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-
-
         return root;
     }
 
@@ -79,8 +77,7 @@ public class AddStudentFragment extends Fragment implements View.OnClickListener
 
 //        FloatingActionButton fab = root.findViewById(R.id.fab);
 //        fab.hide();
-        return root;
-    }
+        }
 
 
 

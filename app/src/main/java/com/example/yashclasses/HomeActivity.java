@@ -1,15 +1,16 @@
 package com.example.yashclasses;
 
-import android.content.DialogInterface;
+import android.database.Cursor;
 import android.os.Bundle;
 
+import com.example.yashclasses.ui.std_manage.StdAdapter;
+import com.example.yashclasses.ui.std_manage.StdDialog;
+import com.example.yashclasses.ui.std_manage.StdManageFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
-import android.view.LayoutInflater;
 import android.view.View;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -23,18 +24,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements StdDialog.StdDialogListener{
 
     private AppBarConfiguration mAppBarConfiguration;
     Button addstd;
     EditText etStd,etFees;
     Spinner spinnermedium;
+    StdAdapter stdAdapter;
+    DatabaseHelper mydb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +47,7 @@ public class HomeActivity extends AppCompatActivity {
         etStd = findViewById(R.id.txtstd);
         etFees = findViewById(R.id.txtfees);
         spinnermedium = findViewById(R.id.spinnerMedium);
-
+        mydb = new DatabaseHelper(this);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,12 +88,18 @@ public class HomeActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-
-
-    public void printMessage() {
-        etStd = findViewById(R.id.txtstd);
-        etFees = findViewById(R.id.txtfees);
-        spinnermedium = findViewById(R.id.spinnerMedium);
-        Toast.makeText(this, "fees" + etFees.getText().toString(), Toast.LENGTH_LONG).show();
+    @Override
+    public void applyTexts(String StdName, double fees, String medium) {
+        try{
+            if(mydb.InsertStd(StdName,medium,fees))
+            {
+                Toast.makeText(getApplicationContext(),"Std : "+StdName+"-"+medium+"\nfees : "+fees+"\nData inserted",Toast.LENGTH_LONG).show();
+                StdManageFragment stdManageFragment = new StdManageFragment();
+                stdManageFragment.populateStdList();
+            }
+        }
+        catch(Exception e){
+            Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+        }
     }
 }
