@@ -14,12 +14,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.yashclasses.DatabaseHelper;
 import com.example.yashclasses.R;
 
+import java.util.ArrayList;
+
 public class StdAdapter extends RecyclerView.Adapter<StdAdapter.StdViewHolder> {
     private Context mContext;
     private Cursor mCursor;
-    public StdAdapter(Context context, Cursor cursor){
+    int len;
+    public StdAdapter(Context context, Cursor cursor,int l){
         mContext = context;
         mCursor = cursor;
+        mCursor.moveToFirst();
+        len = l;
     }
 
     @NonNull
@@ -28,25 +33,30 @@ public class StdAdapter extends RecyclerView.Adapter<StdAdapter.StdViewHolder> {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View view = inflater.inflate(R.layout.custom_std_item,parent,false);
         return new StdViewHolder(view);
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull StdViewHolder holder, int position) {
-        if(!mCursor.move(position)){
+
+
+
+            String std = mCursor.getString(mCursor.getColumnIndex(DatabaseHelper.STD_COL_1));
+            String medium = mCursor.getString(mCursor.getColumnIndex(DatabaseHelper.STD_COL_2));
+            double fees = mCursor.getDouble(mCursor.getColumnIndex(DatabaseHelper.STD_COL_3));
+
+            holder.txtStd.setText(std);
+            String temp = "Fees : "+fees;
+            holder.txtFees.setText(temp);
+            holder.txtMedium.setText(medium +" - Medium");
+
+        if(!mCursor.moveToNext()) {
             return;
         }
 
-        String std = mCursor.getString(mCursor.getColumnIndex(DatabaseHelper.STD_COL_1));
-           String medium = mCursor.getString(mCursor.getColumnIndex(DatabaseHelper.STD_COL_2));
-           double fees = mCursor.getDouble(mCursor.getColumnIndex(DatabaseHelper.STD_COL_3));
-            Std obj = new Std(std,medium,fees);
 
-        Toast.makeText(mContext,std+fees+medium,Toast.LENGTH_LONG).show();
-           holder.txtStd.setText(obj.getStd());
-           String temp = "Fees :" +obj.getFees();
-           holder.txtFees.setText(temp);
-           holder.txtMedium.setText(obj.getMedium());
     }
+
 
     @Override
     public int getItemCount() {
@@ -71,7 +81,6 @@ public class StdAdapter extends RecyclerView.Adapter<StdAdapter.StdViewHolder> {
             super(itemView);
             txtStd = itemView.findViewById(R.id.item_list_std);
             txtMedium = itemView.findViewById(R.id.item_list_medium);
-
             txtFees = itemView.findViewById(R.id.item_list_fees);
 
         }

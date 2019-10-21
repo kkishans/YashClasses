@@ -22,6 +22,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.yashclasses.DatabaseHelper;
 import com.example.yashclasses.R;
 
+import java.util.ArrayList;
+
 public class StdManageFragment extends Fragment implements View.OnClickListener , StdDialog.StdDialogListener {
 
     private StdManageViewModel stdManageViewModel;
@@ -63,8 +65,10 @@ public class StdManageFragment extends Fragment implements View.OnClickListener 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         Cursor c = mydb.getAllStd();
         c.moveToFirst();
-        stdAdapter = new StdAdapter(getContext(),c);
+        int l = c.getCount();
+       StdAdapter  stdAdapter = new StdAdapter(getContext(),c,l);
         recyclerView.setAdapter(stdAdapter);
+
     }
 
     @Override
@@ -79,10 +83,11 @@ public class StdManageFragment extends Fragment implements View.OnClickListener 
     public void addStd() {
         StdDialog stdDialog = new StdDialog();
         stdDialog.show(getFragmentManager()," Std Manage");
-        populateStdList();
+
     }
     @Override
     public void onClick(View view) {
+        populateStdList();
     }
 
     @Override

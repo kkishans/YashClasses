@@ -71,7 +71,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     public Cursor getAllStd(){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(STD_TABLE_NAME,null,null,null,null,null,null);
+        Cursor cursor = db.query(STD_TABLE_NAME,null,null,null,null,null,STD_COL_3);
         cursor.moveToFirst();
         return  cursor;
     }
