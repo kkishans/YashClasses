@@ -1,5 +1,7 @@
 package com.example.yashclasses.ui.addstudent;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +24,7 @@ import com.example.yashclasses.DatabaseHelper;
 import com.example.yashclasses.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class AddStudentFragment extends Fragment implements View.OnClickListener {
+public class AddStudentFragment extends Fragment  {
 
     private AddStudentViewModel addStudentViewModel;
 
@@ -47,7 +49,12 @@ public class AddStudentFragment extends Fragment implements View.OnClickListener
         spinner = root.findViewById(R.id.spinnerMedium);
         btnAdd =root.findViewById(R.id.btnAdd);
 
-        btnAdd.setOnClickListener(this);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddStudent();
+            }
+        });
 
         //Spinner
 
@@ -57,28 +64,31 @@ public class AddStudentFragment extends Fragment implements View.OnClickListener
         return root;
     }
 
-    @Override
-    public void onClick(View view) {
-        AddStudent();
-    }
-
-
     public void AddStudent(){
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean isInserted =  myDb.insertData(edtName.toString(),edtStd.toString(),spinner.toString(),edtContact.toString(),null);
-                if (isInserted == true)
-                    Toast.makeText(getContext(), "Data inserted", Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(getContext(), "Error occured time  of insertion data", Toast.LENGTH_SHORT).show();
-            }
-        });
 
-//        FloatingActionButton fab = root.findViewById(R.id.fab);
-//        fab.hide();
+        boolean flag;
+        String etName = edtName.getText().toString();
+        String etStd = edtStd.getText().toString();
+        String etContact = edtContact.getText().toString();
+        String spMedium = spinner.getSelectedItem().toString();
+        boolean isInserted =  myDb.insertData(etName,etStd,spMedium,etContact,null);
+
+        if(etName.equals("")  ||etStd.equals("")  || spMedium.equals("") ||etContact.equals("")){
+            new AlertDialog.Builder(getActivity()).setTitle("Invalid Data Insertion.")
+                    .setMessage("There are all field required. \nmay you have insert invalid data. \nPlease try again. ")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    }).show();
         }
-
-
+        else{
+            if (isInserted == true)
+                Toast.makeText(getContext(), "Data inserted", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(getContext(), "Error occured time  of insertion data", Toast.LENGTH_SHORT).show();
+        }
+    }
 
 }

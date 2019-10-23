@@ -8,19 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.yashclasses.DatabaseHelper;
 import com.example.yashclasses.R;
-import com.example.yashclasses.ui.std_manage.StdAdapter;
 
 public class HomeFragment extends Fragment {
     Button btnSearch;
@@ -41,7 +37,7 @@ public class HomeFragment extends Fragment {
             populateStudentList();
 
             //Search
-            btnSearch = root.findViewById(R.id.btnSearch);
+            btnSearch = root.findViewById(R.id.btnPay);
             btnSearch.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -53,10 +49,10 @@ public class HomeFragment extends Fragment {
 
     private void populateStudentList() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        Cursor c = mydb.getAllStd();
+        Cursor c = mydb.getAllStudent();
         c.moveToFirst();
         int l = c.getCount();
-        StdAdapter  studentAdapter = new StdAdapter(getContext(),c,l);
+        StudentAdapter  studentAdapter = new StudentAdapter(getContext(),c,l);
         recyclerView.setAdapter(studentAdapter);
     }
 
