@@ -13,7 +13,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE = "Student.db";
     public static final String TABLE_NAME = "Student";
     public static String STD_TABLE_NAME = "std_table";
-    public static final String COL_1 = "Id";
+    public static final String COL_1 = "Sid";
     public static final String COL_2 = "Name";
     public static final String COL_3 = "Std";
     public static final String COL_4 = "Medium";
@@ -74,5 +74,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.query(STD_TABLE_NAME,null,null,null,null,null,STD_COL_3);
         cursor.moveToFirst();
         return  cursor;
+    }
+
+    public Cursor getAllStudent(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_NAME,null, null,null,null,null,COL_3);
+        cursor.moveToFirst();
+        return cursor;
     }
 }

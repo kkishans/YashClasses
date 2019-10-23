@@ -41,7 +41,7 @@ public class StdManageFragment extends Fragment implements View.OnClickListener 
 
         root = inflater.inflate(R.layout.fragment_std_manage, container, false);
         mydb = new DatabaseHelper(getContext());
-        final TextView textView = root.findViewById(R.id.txtStdManage);
+        //final TextView textView = root.findViewById(R.id.txtStdManage);
         btnaddStd = root.findViewById(R.id.btnAddStd);
         recyclerView = root.findViewById(R.id.stdRecyclerview);
         btnaddStd.setOnClickListener(new View.OnClickListener() {
@@ -50,12 +50,12 @@ public class StdManageFragment extends Fragment implements View.OnClickListener 
                 addStd();
             }
         });
-        stdManageViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+//        stdManageViewModel.getText().observe(this, new Observer<String>() {
+//            @Override
+//            public void onChanged(@Nullable String s) {
+//                textView.setText(s);
+//            }
+//        });
         populateStdList();
         return root;
     }
