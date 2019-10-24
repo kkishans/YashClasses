@@ -37,7 +37,7 @@ public class HomeFragment extends Fragment {
             populateStudentList();
 
             //Search
-            btnSearch = root.findViewById(R.id.btnPay);
+            btnSearch = root.findViewById(R.id.btnCall);
             btnSearch.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

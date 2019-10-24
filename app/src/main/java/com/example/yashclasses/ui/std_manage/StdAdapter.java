@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -73,16 +74,20 @@ public class StdAdapter extends RecyclerView.Adapter<StdAdapter.StdViewHolder> {
         }
     }
 
-    public class StdViewHolder extends RecyclerView.ViewHolder{
+    public class StdViewHolder extends RecyclerView.ViewHolder {
 
         public TextView txtStd,txtMedium,txtFees;
+        public Button btnCall,btnPay;
+
         public StdViewHolder(@NonNull View itemView) {
             super(itemView);
             txtStd = itemView.findViewById(R.id.item_list_std);
             txtMedium = itemView.findViewById(R.id.item_list_medium);
             txtFees = itemView.findViewById(R.id.item_list_fees);
 
+
         }
+
     }
 
 }

@@ -1,11 +1,15 @@
 package com.example.yashclasses.ui.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.yashclasses.DatabaseHelper;
 import com.example.yashclasses.R;
@@ -73,9 +77,11 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
         }
     }
 
-    public  class StudentViewHolder extends  RecyclerView.ViewHolder {
+    public  class StudentViewHolder extends  RecyclerView.ViewHolder{
 
         public TextView Sname,Sstd,Smedium;
+        public Button btnCall,btnPay;
+
         public StudentViewHolder(@NonNull View itemView){
             super(itemView);
 
@@ -83,6 +89,34 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
             Sstd = itemView.findViewById(R.id.txtstd);
             Smedium = itemView.findViewById(R.id.Custom_txtMedium);
 
+            btnCall = itemView.findViewById(R.id.btnCall);
+            btnPay = itemView.findViewById(R.id.btnPayment);
+
+            btnCall.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                        mCursor.moveToFirst();
+                        String contact = mCursor.getString(mCursor.getColumnIndex("ContactNo"));
+
+                        Intent intent = new Intent(Intent.ACTION_DIAL , Uri.parse("tel:" + contact));
+
+                        mContext.startActivity(intent);
+
+                        Toast.makeText(mContext, "Call button", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            btnPay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(mContext, "Payment button", Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
         }
+
+
     }
 }
