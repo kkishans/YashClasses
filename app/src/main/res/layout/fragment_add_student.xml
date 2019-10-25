@@ -33,6 +33,7 @@
             android:text="Name"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
+
         <EditText
             android:id="@+id/edtName"
             android:layout_width="200dp"
@@ -136,5 +137,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/add_student" />
     </LinearLayout>
+    
+
 
 </LinearLayout>
