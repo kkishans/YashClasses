@@ -17,11 +17,13 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.yashclasses.DatabaseHelper;
 import com.example.yashclasses.R;
+import com.example.yashclasses.ui.home.HomeFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class AddStudentFragment extends Fragment  {
@@ -30,10 +32,11 @@ public class AddStudentFragment extends Fragment  {
 
     DatabaseHelper myDb;
 
-    EditText edtName,edtStd,edtContact;
+    EditText edtName,edtContact,etLoaction,etFees;
     Button btnAdd;
+    Spinner edtStd;
     Spinner spinner;
-    String[] medium = {"Gujarati","English"};
+    String[] std ;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,13 +45,17 @@ public class AddStudentFragment extends Fragment  {
         View root = inflater.inflate(R.layout.fragment_add_student, container, false);
 
         myDb = new DatabaseHelper(getContext());
+        std = myDb.getAllStdNames();
 
+
+        etFees =root.findViewById(R.id.edtFees);
+        etLoaction = root.findViewById(R.id.edtLocation);
         edtName = root.findViewById(R.id.edtName);
         edtStd = root.findViewById(R.id.edtStd);
         edtContact = root.findViewById(R.id.edtContact);
         spinner = root.findViewById(R.id.spinnerMedium);
         btnAdd =root.findViewById(R.id.btnAdd);
-
+        std = myDb.getAllStdNames();
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,20 +65,27 @@ public class AddStudentFragment extends Fragment  {
 
         //Spinner
 
-        ArrayAdapter adapter = new ArrayAdapter(getContext(),R.layout.support_simple_spinner_dropdown_item, medium);
+        ArrayAdapter adapter = new ArrayAdapter(getContext(),R.layout.support_simple_spinner_dropdown_item,std );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        edtStd.setAdapter(adapter);
         return root;
     }
-
+    private void OpenHomeFragment() {
+        Fragment home = new HomeFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.nav_host_fragment,home);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
     public void AddStudent(){
 
-        boolean flag;
         String etName = edtName.getText().toString();
-        String etStd = edtStd.getText().toString();
+        String etStd = edtStd.getSelectedItem().toString();
         String etContact = edtContact.getText().toString();
         String spMedium = spinner.getSelectedItem().toString();
-        boolean isInserted =  myDb.insertData(etName,etStd,spMedium,etContact,null);
+        String loaction = etLoaction.getText().toString();
+        float fees = Float.valueOf(etFees.getText().toString());
+
 
         if(etName.equals("")  ||etStd.equals("")  || spMedium.equals("") ||etContact.equals("")){
             new AlertDialog.Builder(getActivity()).setTitle("Invalid Data Insertion.")
@@ -84,8 +98,12 @@ public class AddStudentFragment extends Fragment  {
                     }).show();
         }
         else{
-            if (isInserted == true)
+            boolean isInserted =  myDb.insertData(etName,etStd,spMedium,etContact,null, loaction, fees);
+            if (isInserted == true){
                 Toast.makeText(getContext(), "Data inserted", Toast.LENGTH_SHORT).show();
+                OpenHomeFragment();
+            }
+
             else
                 Toast.makeText(getContext(), "Error occured time  of insertion data", Toast.LENGTH_SHORT).show();
         }

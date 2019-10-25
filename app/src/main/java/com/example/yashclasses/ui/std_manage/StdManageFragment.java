@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.yashclasses.DatabaseHelper;
 import com.example.yashclasses.R;
+import com.example.yashclasses.ui.home.HomeFragment;
 
 import java.util.ArrayList;
 
@@ -71,6 +73,14 @@ public class StdManageFragment extends Fragment implements View.OnClickListener 
 
     }
 
+    public void RefreshFragment() {
+        Fragment StdFragment = new StdManageFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.nav_host_fragment,StdFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -83,7 +93,7 @@ public class StdManageFragment extends Fragment implements View.OnClickListener 
     public void addStd() {
         StdDialog stdDialog = new StdDialog();
         stdDialog.show(getFragmentManager()," Std Manage");
-
+        RefreshFragment();
     }
     @Override
     public void onClick(View view) {
@@ -93,5 +103,6 @@ public class StdManageFragment extends Fragment implements View.OnClickListener 
     @Override
     public void applyTexts(String StdName, double fees, String medium) {
         Toast.makeText(getContext(),"Std : "+StdName+"-"+medium+"\nfees : "+fees+"\nData inserted",Toast.LENGTH_LONG).show();
+        RefreshFragment();
     }
 }
