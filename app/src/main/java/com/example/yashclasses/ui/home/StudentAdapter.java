@@ -46,7 +46,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
 
         String Name = mCursor.getString(mCursor.getColumnIndex(DatabaseHelper.COL_2));
         String Std = mCursor.getString(mCursor.getColumnIndex(DatabaseHelper.COL_3));
-        String Medium = mCursor.getString(mCursor.getColumnIndex(DatabaseHelper.COL_4));
+        String Medium = mCursor.getString(mCursor.getColumnIndex(DatabaseHelper.COL_8));
 
         holder.Sname.setText(Name);
         Std = "Std : " + Std;

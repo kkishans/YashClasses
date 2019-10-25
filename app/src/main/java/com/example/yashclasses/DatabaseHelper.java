@@ -5,7 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.UserManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -36,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static String PAY_COL_3 = "credit";
     public static String PAY_COL_4 = "timestamp";
     public DatabaseHelper(@Nullable Context context) {
-        super(context, DATABASE, null, 1);
+        super(context, DATABASE, null, 2);
     }
 
     @Override
@@ -50,15 +52,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         db.execSQL("DROP TABLE "+STD_TABLE_NAME);
+        db.execSQL("DROP TABLE "+PAYMENT_TABLE);
         onCreate(db);
     }
 
     public boolean insertData(String name, String std, String medium, String Contact, String Date,String location,float fees){
         SQLiteDatabase db = this.getReadableDatabase();
-        float fees2 = GetFees(std,medium);
-        if (fees2 != 0){
-            fees = fees2;
-        }
+       if(fees == 0.0 ){
+           float fees2 = GetFees(std,medium);
+           if (fees2 != 0){
+               fees = fees2;
+           }
+           else{
+               return false;
+           }
+       }
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_2 , name);
@@ -119,7 +127,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Float fee;
         SQLiteDatabase db = this.getReadableDatabase();
 
-        fees = db.rawQuery("select fees from " + STD_TABLE_NAME + " where " +STD_COL_1 + " = " + std + " and " + STD_COL_2 + " = " + medium ,null);
+        fees = db.rawQuery("select fees from " + STD_TABLE_NAME + " where " +STD_COL_1 + " = '" + std + "' and " + STD_COL_2 + " = '" + medium+"'" ,null);
 
         if (fees.getCount() == 1){
             fees.moveToFirst();

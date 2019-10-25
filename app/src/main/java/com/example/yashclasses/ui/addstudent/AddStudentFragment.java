@@ -84,8 +84,11 @@ public class AddStudentFragment extends Fragment  {
         String etContact = edtContact.getText().toString();
         String spMedium = spinner.getSelectedItem().toString();
         String loaction = etLoaction.getText().toString();
-        float fees = Float.valueOf(etFees.getText().toString());
-
+        String fee = etFees.getText().toString();
+        if(fee.equals("") ||fee.isEmpty()){
+            fee = "0.0";
+        }
+        float fees = Float.parseFloat(fee);
 
         if(etName.equals("")  ||etStd.equals("")  || spMedium.equals("") ||etContact.equals("")){
             new AlertDialog.Builder(getActivity()).setTitle("Invalid Data Insertion.")
