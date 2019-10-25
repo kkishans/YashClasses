@@ -82,4 +82,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.moveToFirst();
         return cursor;
     }
+
+    public Cursor getOneStd(String id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from " + STD_TABLE_NAME + " where " + STD_COL_0 + " = " + id ,null);
+        return cursor;
+    }
 }
