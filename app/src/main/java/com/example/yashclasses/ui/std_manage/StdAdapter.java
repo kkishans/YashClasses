@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.yashclasses.DatabaseHelper;
@@ -74,7 +76,7 @@ public class StdAdapter extends RecyclerView.Adapter<StdAdapter.StdViewHolder> {
         }
     }
 
-    public class StdViewHolder extends RecyclerView.ViewHolder {
+    public class StdViewHolder extends RecyclerView.ViewHolder implements StdDialog.StdDialogListener {
 
         public TextView txtStd,txtMedium,txtFees;
         public Button btnCall,btnPay;
@@ -85,9 +87,21 @@ public class StdAdapter extends RecyclerView.Adapter<StdAdapter.StdViewHolder> {
             txtMedium = itemView.findViewById(R.id.item_list_medium);
             txtFees = itemView.findViewById(R.id.item_list_fees);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    StdDialog stdDialog = new StdDialog();
+                    //stdDialog.show(,"Std Update");
+                    Toast.makeText(mContext, "Click std", Toast.LENGTH_SHORT).show();
+                }
+            });
 
         }
 
+        @Override
+        public void applyTexts(String StdName, double fees, String medium) {
+
+        }
     }
 
 }

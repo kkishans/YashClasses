@@ -55,8 +55,7 @@ public class StdDialog extends AppCompatDialogFragment {
 
                                         }
                                     }).show();
-                        }else
-                        {
+                        }else {
                             double fees2  = Double.parseDouble(fees);
                             stdDialogListener.applyTexts(StdName,fees2,medium);
                         }

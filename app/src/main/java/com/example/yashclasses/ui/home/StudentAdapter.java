@@ -92,6 +92,13 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
             btnCall = itemView.findViewById(R.id.btnCall);
             btnPay = itemView.findViewById(R.id.btnPayment);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(mContext, "Click event ", Toast.LENGTH_SHORT).show();
+                }
+            });
+
             btnCall.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
