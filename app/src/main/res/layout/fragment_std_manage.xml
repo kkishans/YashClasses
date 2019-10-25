@@ -41,7 +41,7 @@
             android:id="@+id/btnAddStd"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="Add Std"
+            android:background="@drawable/add_std"
             android:textAllCaps="false"
             android:textSize="18sp" />
     </LinearLayout>

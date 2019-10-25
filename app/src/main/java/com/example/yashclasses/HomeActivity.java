@@ -3,6 +3,7 @@ package com.example.yashclasses;
 import android.database.Cursor;
 import android.os.Bundle;
 
+import com.example.yashclasses.ui.home.HomeFragment;
 import com.example.yashclasses.ui.std_manage.StdAdapter;
 import com.example.yashclasses.ui.std_manage.StdDialog;
 import com.example.yashclasses.ui.std_manage.StdManageFragment;
@@ -11,6 +12,8 @@ import com.google.android.material.snackbar.Snackbar;
 
 import android.view.View;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -100,4 +103,5 @@ public class HomeActivity extends AppCompatActivity implements StdDialog.StdDial
             Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
         }
     }
+
 }

@@ -11,15 +11,17 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.yashclasses.DatabaseHelper;
 import com.example.yashclasses.R;
+import com.example.yashclasses.ui.addstudent.AddStudentFragment;
 
 public class HomeFragment extends Fragment {
-    Button btnSearch;
+    Button btnSearch,btnAddStudent;
     private HomeViewModel homeViewModel;
     DatabaseHelper mydb;
     RecyclerView recyclerView;
@@ -33,11 +35,17 @@ public class HomeFragment extends Fragment {
 
             mydb = new DatabaseHelper(getContext());
             recyclerView = root.findViewById(R.id.StudentRecyclerView);
-
+            btnAddStudent = root.findViewById(R.id.btnHomeAddStduent);
+            btnAddStudent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    OpenAddStudentFragment();
+                }
+            });
             populateStudentList();
 
             //Search
-            btnSearch = root.findViewById(R.id.btnPay);
+            btnSearch = root.findViewById(R.id.btnCall);
             btnSearch.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -45,6 +53,14 @@ public class HomeFragment extends Fragment {
                 }
             });
         return root;
+    }
+
+    private void OpenAddStudentFragment() {
+        Fragment addStudent = new AddStudentFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.nav_host_fragment,addStudent);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     private void populateStudentList() {

@@ -5,8 +5,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -81,5 +86,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.query(TABLE_NAME,null, null,null,null,null,COL_3);
         cursor.moveToFirst();
         return cursor;
+    }
+
+    public String[] getAllStdNames(){
+        String [] stdNamesList;
+        int i =0;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String [] cols = {STD_COL_1};
+
+            Cursor c = db.query(STD_TABLE_NAME,cols, null,null,null,null,STD_COL_3);
+            stdNamesList = new String[c.getCount()];
+        while(c.moveToNext()){
+               stdNamesList[i] = c.getString(c.getColumnIndex(STD_COL_1));
+               i++;
+            }
+        return stdNamesList;
     }
 }
