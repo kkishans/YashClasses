@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
@@ -16,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Standards List"
+            android:text="Class List"
             android:textSize="24sp" />
     </LinearLayout>
 
@@ -41,9 +42,9 @@
             android:id="@+id/btnAddStd"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/add_std"
             android:textAllCaps="false"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:text="Add Class" />
     </LinearLayout>
 
 </LinearLayout>

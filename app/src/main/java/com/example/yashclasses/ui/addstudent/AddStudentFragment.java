@@ -32,7 +32,7 @@ public class AddStudentFragment extends Fragment  {
 
     DatabaseHelper myDb;
 
-    EditText edtName,edtContact;
+    EditText edtName,edtContact,etLoaction,etFees;
     Button btnAdd;
     Spinner edtStd;
     Spinner spinner;
@@ -47,6 +47,9 @@ public class AddStudentFragment extends Fragment  {
         myDb = new DatabaseHelper(getContext());
         std = myDb.getAllStdNames();
 
+
+        etFees =root.findViewById(R.id.edtFees);
+        etLoaction = root.findViewById(R.id.edtLocation);
         edtName = root.findViewById(R.id.edtName);
         edtStd = root.findViewById(R.id.edtStd);
         edtContact = root.findViewById(R.id.edtContact);
@@ -80,6 +83,8 @@ public class AddStudentFragment extends Fragment  {
         String etStd = edtStd.getSelectedItem().toString();
         String etContact = edtContact.getText().toString();
         String spMedium = spinner.getSelectedItem().toString();
+        String loaction = etLoaction.getText().toString();
+        float fees = Float.valueOf(etFees.getText().toString());
 
 
         if(etName.equals("")  ||etStd.equals("")  || spMedium.equals("") ||etContact.equals("")){
@@ -93,7 +98,7 @@ public class AddStudentFragment extends Fragment  {
                     }).show();
         }
         else{
-            boolean isInserted =  myDb.insertData(etName,etStd,spMedium,etContact,null);
+            boolean isInserted =  myDb.insertData(etName,etStd,spMedium,etContact,null, loaction, fees);
             if (isInserted == true){
                 Toast.makeText(getContext(), "Data inserted", Toast.LENGTH_SHORT).show();
                 OpenHomeFragment();
