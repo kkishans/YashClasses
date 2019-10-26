@@ -141,19 +141,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return stdNamesList;
     }
 
-    public float GetFees(String std, String medium){
-        Cursor fees;
-        Float fee;
-        SQLiteDatabase db = this.getReadableDatabase();
-
-         fees = db.rawQuery("select fees from " + STD_TABLE_NAME + " where " +STD_COL_1 + " = " + std + " and " + STD_COL_2 + " = '" + medium + "'" ,null);
-
-            while (c.moveToNext()) {
-                stdNamesList[i] = c.getString(c.getColumnIndex(STD_COL_1));
-                i++;
-            }
-            return stdNamesList;
-    }
+//    public float GetFees(String std, String medium){
+//        Cursor fees;
+//        Float fee;
+//        SQLiteDatabase db = this.getReadableDatabase();
+//
+//         fees = db.rawQuery("select fees from " + STD_TABLE_NAME + " where " +STD_COL_1 + " = " + std + " and " + STD_COL_2 + " = '" + medium + "'" ,null);
+//
+//        float[] stdNamesList;
+//        while (c.moveToNext()) {
+//                stdNamesList[i] = c.getString(c.getColumnIndex(STD_COL_1));
+//                i++;
+//            }
+//            return stdNamesList;
+//    }
     public String[] getAllMediumNames(String Class) {
         String[] stdMediumList;
         int i = 0;
@@ -170,8 +171,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return stdMediumList;
     }
 
-        else return 0;
-    }
+
+
 
     public boolean insertPayment(float amount , String sid){
         SQLiteDatabase db = this.getReadableDatabase();
@@ -185,7 +186,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return  false;
         else    return true;
     }
-}
+
         public float GetFees (String std, String medium){
             Cursor fees;
             Float fee;
@@ -200,6 +201,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             } else return 0;
 
 
+        }
+
+        public boolean updatePay(float amount ,String sid){
+                SQLiteDatabase db =  this.getReadableDatabase();
+                float fee;
+                Cursor c = db.rawQuery("select " + COL_8 + " from " + TABLE_NAME + " where " + COL_1 + " = " + sid , null );
+
+                c.moveToFirst();
+                fee = c.getFloat(c.getColumnIndex(COL_8));
+                fee = fee - amount;
+
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(COL_8 , fee);
+               // long res = db.rawQuery("Update " + TABLE_NAME + " set " + COL_8 + " = " + COL_8 + " - " + amount + " where "+ COL_1 + " = " + sid ,null);
+                long result = db.update(TABLE_NAME , contentValues , COL_1 + " = "+ sid,null);
+
+            if (result == -1)
+                return false;
+            else return true;
         }
  }
 

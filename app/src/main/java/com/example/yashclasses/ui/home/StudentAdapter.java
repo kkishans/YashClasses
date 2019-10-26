@@ -51,12 +51,14 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
         String Name = mCursor.getString(mCursor.getColumnIndex(DatabaseHelper.COL_2));
         String Std = mCursor.getString(mCursor.getColumnIndex(DatabaseHelper.COL_3));
         String Medium = mCursor.getString(mCursor.getColumnIndex(DatabaseHelper.COL_4));
+        float fees = mCursor.getFloat(mCursor.getColumnIndex(DatabaseHelper.COL_8));
 
         holder.Sname.setText(Name);
         Std = "Class : " + Std;
         Medium = Medium + " - Medium";
         holder.Sstd.setText(Std);
         holder.Smedium.setText(Medium);
+        holder.RemainFee.setText(" Remaining Fees : " + fees);
 
         if(!mCursor.moveToNext()) {
             return;
@@ -83,7 +85,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
 
     public  class StudentViewHolder extends  RecyclerView.ViewHolder{
 
-        public TextView Sname,Sstd,Smedium;
+        public TextView Sname,Sstd,Smedium,RemainFee;
         public Button btnCall,btnPay;
         String Sid;
         DatabaseHelper mydb = new DatabaseHelper(mContext);
@@ -94,6 +96,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
             Sname = itemView.findViewById(R.id.Custom_txtName);
             Sstd = itemView.findViewById(R.id.txtstd);
             Smedium = itemView.findViewById(R.id.Custom_txtMedium);
+            RemainFee = itemView.findViewById(R.id.RemainningFees);
 
             btnCall = itemView.findViewById(R.id.btnCall);
             btnPay = itemView.findViewById(R.id.btnPayment);
@@ -163,7 +166,9 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
                                         }).show();
                             }else {
                                if (mydb.insertPayment(amount,Sid)){
-                                   Toast.makeText(mContext, "Payment Done", Toast.LENGTH_SHORT).show();
+                                   if (mydb.updatePay(amount,Sid)){
+                                       Toast.makeText(mContext, "Payment Done", Toast.LENGTH_SHORT).show();
+                                   }
                                }
                                else Toast.makeText(mContext, "Some problme is there", Toast.LENGTH_SHORT).show();
                             }

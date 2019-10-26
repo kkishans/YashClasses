@@ -102,7 +102,7 @@ public class AddStudentFragment extends Fragment  {
         }else fees = Float.parseFloat(etFees.getText().toString());
 
 
-        if(etName.equals("") || etName.isEmpty() ||etStd.equals("") || etStd.isEmpty() || spMedium.equals("") || spMedium.isEmpty()||etContact.equals("") || loaction.isEmpty() || fee.isEmpty()){
+        if(etName.equals("") || etName.isEmpty() ||etStd.equals("") || etStd.isEmpty() || spMedium.equals("") || spMedium.isEmpty()||etContact.equals("") || loaction.isEmpty() ){
             new AlertDialog.Builder(getActivity()).setTitle("Invalid Data Insertion.")
                     .setMessage("There are all field required. \nmay you have insert invalid data. \nPlease try again. ")
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
