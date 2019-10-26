@@ -42,9 +42,9 @@
             android:id="@+id/btnAddStd"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/add_class"
             android:textAllCaps="false"
-            android:textSize="18sp"
-            tools:text="Add Class" />
+            android:textSize="18sp" />
     </LinearLayout>
 
 </LinearLayout>

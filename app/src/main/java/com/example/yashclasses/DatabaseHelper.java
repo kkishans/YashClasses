@@ -130,8 +130,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             SQLiteDatabase db = this.getReadableDatabase();
             String[] cols = {STD_COL_1};
 
+            Cursor c = db.query(true, STD_TABLE_NAME, cols, null, null, null, null, STD_COL_3,null);
 
-            Cursor c = db.query(STD_TABLE_NAME, cols, null, null, null, null, STD_COL_3);
             stdNamesList = new String[c.getCount()];
 
         while(c.moveToNext()){

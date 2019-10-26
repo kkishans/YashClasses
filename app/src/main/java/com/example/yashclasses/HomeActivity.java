@@ -97,6 +97,8 @@ public class HomeActivity extends AppCompatActivity implements StdDialog.StdDial
             if(mydb.InsertStd(StdName,medium,fees))
             {
                 Toast.makeText(getApplicationContext(),"Std : "+StdName+" "+medium+"-medium \nfees : "+fees+"\nData inserted",Toast.LENGTH_LONG).show();
+                // StdManageFragment stdManageFragment = new StdManageFragment();
+                // stdManageFragment.populateStdList();
             }
         }
         catch(Exception e){
