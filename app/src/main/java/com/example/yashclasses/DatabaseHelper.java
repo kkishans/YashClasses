@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -55,10 +56,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public boolean insertData(String name, String std, String medium, String Contact, String Date,String location,float fees){
         SQLiteDatabase db = this.getReadableDatabase();
-        float fees2 = GetFees(std,medium);
-        if (fees2 != 0){
-            fees = fees2;
+        if (fees == 0) {
+            fees = GetFees(std,medium);
         }
+
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_2 , name);
@@ -101,10 +102,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public Cursor getOneStd(String id){
+    public Cursor getOneStd(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select * from " + STD_TABLE_NAME + " where " + STD_COL_0 + " = " + id ,null);
+        Cursor cursor = db.rawQuery("select * from " + STD_TABLE_NAME + " where " + STD_COL_0 + " = " + id, null);
         return cursor;
+    }
 
     public String[] getAllStdNames(){
         String [] stdNamesList;
@@ -117,15 +119,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         while(c.moveToNext()){
                stdNamesList[i] = c.getString(c.getColumnIndex(STD_COL_1));
                i++;
-            }
+        }
         return stdNamesList;
     }
+
     public float GetFees(String std, String medium){
         Cursor fees;
         Float fee;
         SQLiteDatabase db = this.getReadableDatabase();
 
-        fees = db.rawQuery("select fees from " + STD_TABLE_NAME + " where " +STD_COL_1 + " = " + std + " and " + STD_COL_2 + " = " + medium ,null);
+         fees = db.rawQuery("select fees from " + STD_TABLE_NAME + " where " +STD_COL_1 + " = " + std + " and " + STD_COL_2 + " = '" + medium + "'" ,null);
 
         if (fees.getCount() == 1){
             fees.moveToFirst();
@@ -134,7 +137,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         else return 0;
+    }
 
+    public boolean insertPayment(float amount , String sid){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(PAY_COL_2,sid);
+        contentValues.put(PAY_COL_3 , amount);
 
+        long result = db.insert(PAYMENT_TABLE,null,contentValues);
+
+        if (result == -1)
+            return  false;
+        else    return true;
     }
 }

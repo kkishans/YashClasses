@@ -84,7 +84,10 @@ public class AddStudentFragment extends Fragment  {
         String etContact = edtContact.getText().toString();
         String spMedium = spinner.getSelectedItem().toString();
         String loaction = etLoaction.getText().toString();
-        float fees = Float.valueOf(etFees.getText().toString());
+        float fees;
+        if (etFees.getText().toString().equals("")){
+            fees = 0;
+        }else fees = Float.parseFloat(etFees.getText().toString());
 
 
         if(etName.equals("")  ||etStd.equals("")  || spMedium.equals("") ||etContact.equals("")){

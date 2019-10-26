@@ -79,7 +79,7 @@ public class StdAdapter extends RecyclerView.Adapter<StdAdapter.StdViewHolder> {
     public class StdViewHolder extends RecyclerView.ViewHolder implements StdDialog.StdDialogListener {
 
         public TextView txtStd,txtMedium,txtFees;
-        public Button btnCall,btnPay;
+
 
         public StdViewHolder(@NonNull View itemView) {
             super(itemView);
