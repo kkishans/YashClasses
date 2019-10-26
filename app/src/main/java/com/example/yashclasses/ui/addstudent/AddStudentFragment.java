@@ -36,7 +36,7 @@ public class AddStudentFragment extends Fragment  {
     Button btnAdd;
     Spinner edtStd;
     Spinner spinner;
-    String[] std ;
+    String[] std,medium ;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -46,7 +46,6 @@ public class AddStudentFragment extends Fragment  {
 
         myDb = new DatabaseHelper(getContext());
         std = myDb.getAllStdNames();
-
 
         etFees =root.findViewById(R.id.edtFees);
         etLoaction = root.findViewById(R.id.edtLocation);
@@ -65,9 +64,21 @@ public class AddStudentFragment extends Fragment  {
 
         //Spinner
 
-        ArrayAdapter adapter = new ArrayAdapter(getContext(),R.layout.support_simple_spinner_dropdown_item,std );
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        edtStd.setAdapter(adapter);
+        ArrayAdapter adapterclass = new ArrayAdapter(getContext(),R.layout.support_simple_spinner_dropdown_item,std );
+        adapterclass.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        edtStd.setAdapter(adapterclass);
+
+       edtStd.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+           @Override
+           public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+               setMediumAdapter(i);
+           }
+
+           @Override
+           public void onNothingSelected(AdapterView<?> adapterView) {
+
+           }
+       });
         return root;
     }
     private void OpenHomeFragment() {
@@ -90,7 +101,7 @@ public class AddStudentFragment extends Fragment  {
         }
         float fees = Float.parseFloat(fee);
 
-        if(etName.equals("")  ||etStd.equals("")  || spMedium.equals("") ||etContact.equals("")){
+        if(etName.equals("") || etName.isEmpty() ||etStd.equals("") || etStd.isEmpty() || spMedium.equals("") || spMedium.isEmpty()||etContact.equals("") || loaction.isEmpty() || fee.isEmpty()){
             new AlertDialog.Builder(getActivity()).setTitle("Invalid Data Insertion.")
                     .setMessage("There are all field required. \nmay you have insert invalid data. \nPlease try again. ")
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -111,5 +122,12 @@ public class AddStudentFragment extends Fragment  {
                 Toast.makeText(getContext(), "Error occured time  of insertion data", Toast.LENGTH_SHORT).show();
         }
     }
+    public void setMediumAdapter(int id){
 
+        medium = myDb.getAllMediumNames(edtStd.getItemAtPosition(id).toString());
+        Toast.makeText(getContext(),medium[0],Toast.LENGTH_LONG).show();
+        ArrayAdapter adaptermedium = new ArrayAdapter(getContext(),R.layout.support_simple_spinner_dropdown_item,medium );
+        adaptermedium.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adaptermedium);
+    }
 }

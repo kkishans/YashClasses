@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -25,6 +28,7 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
     DatabaseHelper mydb;
     RecyclerView recyclerView;
+    Spinner spSortlist;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                 ViewGroup container, Bundle savedInstanceState) {
@@ -36,13 +40,14 @@ public class HomeFragment extends Fragment {
             mydb = new DatabaseHelper(getContext());
             recyclerView = root.findViewById(R.id.StudentRecyclerView);
             btnAddStudent = root.findViewById(R.id.btnHomeAddStduent);
+            spSortlist = root.findViewById(R.id.spinnerSoryBy);
             btnAddStudent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     OpenAddStudentFragment();
                 }
             });
-            populateStudentList();
+            populateStudentList("Name");
 
             //Search
             btnSearch = root.findViewById(R.id.btnCall);
@@ -50,6 +55,18 @@ public class HomeFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     getMessage();
+                }
+            });
+
+            spSortlist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    SortList(spSortlist.getItemAtPosition(i).toString());
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
                 }
             });
         return root;
@@ -63,15 +80,18 @@ public class HomeFragment extends Fragment {
         transaction.commit();
     }
 
-    private void populateStudentList() {
+    private void populateStudentList(String sortBy) {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        Cursor c = mydb.getAllStudent();
+        Cursor c = mydb.getAllStudent(sortBy);
         c.moveToFirst();
         int l = c.getCount();
         StudentAdapter  studentAdapter = new StudentAdapter(getContext(),c,l);
         recyclerView.setAdapter(studentAdapter);
     }
 
+    public void SortList(String name){
+        populateStudentList(name);
+    }
     public void getMessage(){
         new AlertDialog.Builder(getActivity()).setTitle("Work Under Process.")
                 .setMessage("Which funtion do you want to preform that is under process right now. \nPlease try after done. ")
