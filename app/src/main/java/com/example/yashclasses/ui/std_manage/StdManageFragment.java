@@ -64,7 +64,7 @@ public class StdManageFragment extends Fragment implements View.OnClickListener 
 
     public void populateStdList() {
         recyclerView = root.findViewById(R.id.stdRecyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
         Cursor c = mydb.getAllStd();
         c.moveToFirst();
         int l = c.getCount();
