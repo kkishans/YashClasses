@@ -13,7 +13,7 @@
         android:layout_height="48dp"
         android:layout_marginLeft="20dp"
         android:gravity="center_vertical"
-        android:text="Add Standard"
+        android:text="Add Class"
         android:textColor="#2196F3"
         android:textSize="18sp" />
 
@@ -24,7 +24,7 @@
         android:layout_marginTop="10dp"
         android:ems="10"
         android:gravity="center"
-        android:hint="Std"
+        android:hint="Class"
         android:inputType="textPersonName" />
 
     <Spinner

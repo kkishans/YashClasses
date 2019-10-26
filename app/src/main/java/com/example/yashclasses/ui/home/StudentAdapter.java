@@ -53,7 +53,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
         String Medium = mCursor.getString(mCursor.getColumnIndex(DatabaseHelper.COL_4));
 
         holder.Sname.setText(Name);
-        Std = "Std : " + Std;
+        Std = "Class : " + Std;
         Medium = Medium + " - Medium";
         holder.Sstd.setText(Std);
         holder.Smedium.setText(Medium);

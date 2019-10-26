@@ -46,7 +46,7 @@ public class StdDialog extends AppCompatDialogFragment {
                         String StdName = etStd.getText().toString();
                         String medium = spinnermedium.getSelectedItem().toString();
                         String fees = etFees.getText().toString();
-                        if(StdName.equals("") || medium.equals("")  ||fees.equals("")){
+                        if(StdName.equals("") || medium.equals("")  ||fees.equals("") || StdName.isEmpty() || medium.isEmpty() || fees.isEmpty()){
                             new AlertDialog.Builder(getActivity()).setTitle("Invalid Data Insertion.")
                                     .setMessage("There are all field required. \nmay you have insert invalid data. \nPlease try again. ")
                                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
