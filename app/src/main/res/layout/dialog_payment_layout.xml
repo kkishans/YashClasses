@@ -22,6 +22,6 @@
         android:ems="10"
         android:gravity="center"
         android:hint="amount"
-        android:inputType="textPersonName" />
+        android:inputType="number" />
 
 </LinearLayout>

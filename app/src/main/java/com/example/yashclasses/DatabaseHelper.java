@@ -38,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " + STD_TABLE_NAME + "(" + STD_COL_0 + " INTEGER PRIMARY KEY AUTOINCREMENT, " + STD_COL_1 + " TEXT, " + STD_COL_2 + " TEXT, " + STD_COL_3 + " Double)");
         db.execSQL("create table  " + TABLE_NAME + "(Sid  INTEGER PRIMARY KEY  AUTOINCREMENT, Name TEXT,Std text,Medium text,ContactNo text,AdmissionDate DATE,location TEXT,to_pay float )");
-        db.execSQL("create table " + PAYMENT_TABLE + " ( " + PAY_COL_1 + " INTEGER PRIMARY KEY ," + PAY_COL_2 + " INTEGER REFERENCES " + TABLE_NAME + "(" + COL_1 + ") ," + PAY_COL_3 + " TEXT ," + PAY_COL_4 + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP)");
+        db.execSQL("create table " + PAYMENT_TABLE + " ( " + PAY_COL_1 + " INTEGER PRIMARY KEY ," + PAY_COL_2 + " INTEGER REFERENCES " + TABLE_NAME + "(" + COL_1 + ") ," + PAY_COL_3 + " TEXT ," + PAY_COL_4 + " TIMESTAMP DEFAULT CURRENT_DATE)");
     }
 
     @Override
@@ -91,6 +91,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.moveToFirst();
         return cursor;
     }
+
+
 
     public Cursor getAllStudent(String sortBy) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -177,6 +179,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             } else return 0;
 
 
+        }
+
+        public Cursor getPaymentHistoryForStudent(String sid){
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.rawQuery("select * from " + PAYMENT_TABLE + " where " + PAY_COL_2 + " = " + sid +" order by " + PAY_COL_4  + " DESC ",null );
+            return cursor;
         }
 
         public boolean updatePay(float amount ,String sid){
