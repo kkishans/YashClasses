@@ -133,6 +133,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return stdNamesList;
     }
 
+
     public String[] getAllMediumNames(String Class) {
         String[] stdMediumList;
         int i = 0;
@@ -148,9 +149,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return stdMediumList;
     }
-
-
-
 
     public boolean insertPayment(float amount , String sid){
         SQLiteDatabase db = this.getReadableDatabase();

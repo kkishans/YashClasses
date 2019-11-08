@@ -18,33 +18,38 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Class List"
+            android:textColor="#9C2196F3"
             android:textSize="24sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="428dp"
+        android:layout_height="621dp"
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/stdRecyclerview"
             android:layout_width="match_parent"
-            android:layout_height="560dp" />
+            android:layout_height="match_parent" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginTop="10dp"
         android:gravity="bottom|center"
         android:orientation="vertical">
 
         <Button
             android:id="@+id/btnAddStd"
             android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/add_class"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:text="Add Class"
             android:textAllCaps="false"
-            android:textSize="18sp" />
+            android:textColor="#D82196F3"
+            android:textSize="30sp" />
     </LinearLayout>
 
 </LinearLayout>

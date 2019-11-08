@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.text.method.TextKeyListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,9 @@ import com.example.yashclasses.ui.std_manage.StdDialog;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentViewHolder> {
     private Context mContext;
@@ -53,8 +57,8 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
         String Medium = mCursor.getString(mCursor.getColumnIndex(DatabaseHelper.COL_4));
         float fees = mCursor.getFloat(mCursor.getColumnIndex(DatabaseHelper.COL_8));
 
-        holder.Sname.setText(Name);
-        Std = "Class : " + Std;
+        holder.Sname.setText(capitalize(Name));
+        Std = Std +" : ";
         Medium = Medium + " - Medium";
         holder.Sstd.setText(Std);
         holder.Smedium.setText(Medium);
@@ -66,7 +70,15 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
 
     }
 
+    private String capitalize(String capString){
+        StringBuffer capBuffer = new StringBuffer();
+        Matcher capMatcher = Pattern.compile("([a-z])([a-z]*)", Pattern.CASE_INSENSITIVE).matcher(capString);
+        while (capMatcher.find()){
+            capMatcher.appendReplacement(capBuffer, capMatcher.group(1).toUpperCase() + capMatcher.group(2).toLowerCase());
+        }
 
+        return capMatcher.appendTail(capBuffer).toString();
+    }
     @Override
     public int getItemCount() {
         return mCursor.getCount();
