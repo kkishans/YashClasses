@@ -126,7 +126,6 @@ public class AddStudentFragment extends Fragment  {
     public void setMediumAdapter(int id){
 
         medium = myDb.getAllMediumNames(edtStd.getItemAtPosition(id).toString());
-        Toast.makeText(getContext(),medium[0],Toast.LENGTH_LONG).show();
         ArrayAdapter adaptermedium = new ArrayAdapter(getContext(),R.layout.support_simple_spinner_dropdown_item,medium );
         adaptermedium.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adaptermedium);

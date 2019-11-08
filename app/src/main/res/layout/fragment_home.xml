@@ -83,7 +83,11 @@
             android:id="@+id/btnHomeAddStduent"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/add_student"
-            android:gravity="center" />
+            android:background="@null"
+            android:gravity="center"
+            android:text="@string/menu_add_student"
+            android:textAllCaps="false"
+            android:textColor="#B52196F3"
+            android:textSize="30sp" />
     </LinearLayout>
 </LinearLayout>

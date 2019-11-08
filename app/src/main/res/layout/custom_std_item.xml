@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:layout_margin="10dp"
-    android:background="#4DFF9800"
+    android:background="#1200BCD4"
     android:gravity="center"
     android:orientation="horizontal">
 
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="TextView"
-            android:textColor="#9C27B0"
+            android:textColor="#616363"
             android:textSize="24sp" />
 
         <TextView
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="TextView"
-            android:textColor="#FF5722"
+            android:textColor="#706F6F"
             android:textSize="24sp"
             android:visibility="visible" />
     </LinearLayout>

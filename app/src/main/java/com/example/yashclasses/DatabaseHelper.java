@@ -142,21 +142,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public float GetFees (String std, String medium){
-        Cursor fees;
-        Float fee;
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        fees = db.rawQuery("select fees from " + STD_TABLE_NAME + " where " + STD_COL_1 + " = '" + std + "' and " + STD_COL_2 + " = '" + medium + "'", null);
-
-        if (fees.getCount() == 1) {
-            fees.moveToFirst();
-            fee = fees.getFloat(fees.getColumnIndex(STD_COL_3));
-            return fee;
-        } else return 0;
-
-
-    }
     public String[] getAllMediumNames(String Class) {
         String[] stdMediumList;
         int i = 0;
