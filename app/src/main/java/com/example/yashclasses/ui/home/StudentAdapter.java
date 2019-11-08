@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.yashclasses.DatabaseHelper;
+import com.example.yashclasses.PaymentHistory;
 import com.example.yashclasses.R;
 import com.example.yashclasses.ui.std_manage.StdAdapter;
 import com.example.yashclasses.ui.std_manage.StdDialog;
@@ -30,6 +31,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
     private Context mContext;
     private Cursor mCursor;
     int len;
+
 
     public StudentAdapter(Context context, Cursor cursor,int l){
         mContext = context;
@@ -116,7 +118,16 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(mContext, "Click event " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
+                    mCursor.moveToFirst();
+                    mCursor.move(getAdapterPosition());
+                    String sid = mCursor.getString(mCursor.getColumnIndex(DatabaseHelper.COL_1));
+
+                    Intent intent = new Intent(mContext, PaymentHistory.class);
+                    intent.putExtra("Sid",sid);
+                    intent.putExtra("Sname",Sname.getText().toString());
+                    mContext.startActivity(intent);
+
+                    //Toast.makeText(mContext, "Click event " + getAdapterPosition() + " " + sid , Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -132,14 +143,14 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
 
                         mContext.startActivity(intent);
 
-                        Toast.makeText(mContext, "Call button", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(mContext, "Call button", Toast.LENGTH_SHORT).show();
                 }
             });
 
             btnPay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(mContext, "Payment button", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(mContext, "Payment button", Toast.LENGTH_SHORT).show();
                     paymentDialog();
                 }
             });
